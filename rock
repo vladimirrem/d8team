@@ -6,8 +6,8 @@ if [ ! -d ./html ]; then
   echo "First start? (y/n):"
   read conf
   if [ "$conf == y" ]; then
-    chmod +x ./build/install.sh
-    chmod +x ./build/apcon.sh
+    chmod +x ./scripts/install.sh
+    chmod +x ./scripts/apcon.sh
     ./build/install.sh
     else
     exit 1

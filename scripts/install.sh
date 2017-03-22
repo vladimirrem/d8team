@@ -24,7 +24,6 @@ while [ "$NAME" == '' ]
 do
   echo "Enter project name:"
   read NAME
-  echo "project name: $NAME" >> README.md
 done
 DBNAME=''
 while [ "$DBNAME" == '' ]
