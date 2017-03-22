@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [ ! -d ./html ]; then
+  echo "First start? (y/n):"
+  read conf
+  if [ "$conf == y" ]; then
+    chmod +x ./build/install.sh
+    chmod +x ./build/apcon.sh
+    ./build/install.sh
+    else
+    exit 1
+  fi
+fi
