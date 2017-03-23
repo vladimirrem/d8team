@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "=== Downloading Drupal 8.2.7 ==="
+# Download Drupal from Drupal.org and extract
 wget https://ftp.drupal.org/files/projects/drupal-8.2.7.tar.gz
 tar xvzf drupal-8.2.7.tar.gz
 rm drupal-8.2.7.tar.gz
@@ -15,7 +15,8 @@ mkdir modules/custom
 mkdir modules/contrib
 mkdir libraries
 mkdir sites/default/files
-chmod 777 -R sites/default/files
+chmod 777 -R sites/default
+cp ../composer.json ./composer.json
 clear
 
 echo "=== SITE SETTINGS ==="
@@ -58,29 +59,18 @@ do
     fi
   done
 done
-cp sites/default/default.settings.php sites/default/settings.php
-echo "\$databases['default']['default'] = array ("  >> sites/default/settings.php
-echo "  'database' => '$DBNAME'," >> sites/default/settings.php
-echo "  'username' => '$LOGIN'," >> sites/default/settings.php
-echo "  'password' => '$PASSWORD'," >> sites/default/settings.php
-echo "  'prefix' => ''," >> sites/default/settings.php
-echo "  'host' => 'localhost'," >> sites/default/settings.php
-echo "  'port' => ''," >> sites/default/settings.php
-echo "  'driver' => 'mysql'," >> sites/default/settings.php
-echo "  'namespace' => 'Drupal\\\Core\\\Database\\\Driver\\\mysql'," >> sites/default/settings.php
-echo ");" >> sites/default/settings.php
 
-# Run composer to install drush
-composer require drush/drush
+# Run composer to install required packages
+composer update
 
 # Install site via drush with admin user
-drush site-install standard --account-name=admin --account-pass=admin  --site-name=$NAME --db-url=mysql://$LOGIN:$PASSWORD@localhost:/$DBNAME -y
+./vendor/bin/drush site-install standard --account-name=admin --account-pass=admin  --site-name=$NAME --db-url=mysql://$LOGIN:$PASSWORD@localhost:/$DBNAME -y
 
 cd ../
 
 if [ ! -d ./config ]; then
   export NAME
-  ./build/apcon.sh
+  ./scripts/apcon.sh
 fi
 echo
 echo "Admin login: admin"

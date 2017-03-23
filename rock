@@ -8,7 +8,7 @@ if [ ! -d ./html ]; then
   if [ "$conf == y" ]; then
     chmod +x ./scripts/install.sh
     chmod +x ./scripts/apcon.sh
-    ./build/install.sh
+    ./scripts/install.sh
     else
     exit 1
   fi
