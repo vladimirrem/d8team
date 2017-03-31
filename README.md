@@ -1,6 +1,9 @@
 <h2>DESCRIPTION</h2>
 <p>Provides initial local Drupal 8 site auto installation.</p>
 
+<h2>REQUIREMENTS</h2>
+<p>This magic uses Composer. If you don`t know what is it read <a href="https://getcomposer.org/doc/00-intro.md">here</a>.</p>
+
 <h2>USAGE</h2>
 <p>Paste the commands bellow to your terminal:</p>
 <code style="color: grey">
